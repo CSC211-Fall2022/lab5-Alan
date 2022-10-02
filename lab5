@@ -1,0 +1,96 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <iomanip>
+using namespace std;
+void showMenu();
+void printCheck(double);
+
+
+
+int main() {
+    
+    struct menuItemType{
+        string menuItem;
+        double menuPrice;
+        int count;
+    };
+   
+    cout << fixed << setprecision(2);
+   menuItemType menuList[3];
+    int numberOfOrders;
+    int itemFromMenu;
+    int numberOfItems;
+    double total = 0;
+    cout << "Welcome to Johnny Restaurant" << endl;
+    
+    cin >> numberOfOrders;
+   
+    for(int i = 0;i < numberOfOrders;i++){
+        
+        cin >> itemFromMenu;
+        
+        cin >> numberOfItems;
+        
+        menuList[1].count = numberOfItems;
+        
+        switch(itemFromMenu){
+            case 1:
+                menuList[0].menuItem = "Plain Egg";
+                menuList[2].menuPrice = 1.45 * menuList[1].count;
+                break;
+            case 2:
+                menuList[0].menuItem = "Bacon and Egg";
+                menuList[2].menuPrice = 2.45 * menuList[1].count;
+                break;
+            case 3:
+                menuList[0].menuItem = "Muffin";
+                menuList[2].menuPrice = 0.99 * menuList[1].count;
+                break;
+            case 4:
+                menuList[0].menuItem = "French Toast";
+                menuList[2].menuPrice = 1.99 * menuList[1].count;
+                break;
+            case 5:
+                menuList[0].menuItem = "Fruit Basket";
+                menuList[2].menuPrice = 2.49 * menuList[1].count;
+                break;
+            case 6:
+                menuList[0].menuItem = "Cereal";
+                menuList[2].menuPrice = 0.69 * menuList[1].count;
+                break;
+            case 7:
+                menuList[0].menuItem = "Coffee";
+                menuList[2].menuPrice = 0.50 * menuList[1].count;
+                break;
+            case 8:
+                menuList[0].menuItem = "Tea";
+                menuList[2].menuPrice = 0.75 * menuList[1].count;
+                break;
+                
+        }
+                cout << left << setw(16) << menuList[0].menuItem << right << setw(2)  << menuList[1].count << " $" << menuList[2].menuPrice << endl;
+        
+            total = total + (menuList[2].menuPrice);
+        
+    }
+    
+    printCheck(total);
+   
+   
+   
+ 
+   
+   
+   
+   
+   return 0;
+}
+
+
+
+void printCheck(double total){
+   cout << left << setw(19) << "Amount Total" << "$" << total << endl;
+   cout << left << setw(19) << "Tax" << "$" << (total * 0.0886) << endl;
+   cout << left << setw(19) << "Amount Due" << "$" << total + (total * 0.0886);
+}
