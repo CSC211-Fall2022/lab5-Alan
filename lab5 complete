@@ -1,0 +1,129 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <iomanip>
+using namespace std;
+void showMenu();
+void printCheck(double);
+double getData();
+
+struct menuItemType{
+    string menuItem;
+    double menuPrice;
+    int count;
+};
+
+
+int main() {
+
+    cout << fixed << setprecision(2);
+    cout << "Welcome to Johnny Restaurant" << endl;
+    showMenu();
+    cout << "\nYour check:" << endl;
+    printCheck(getData());
+   
+   
+
+   return 0;
+}
+
+
+
+void printCheck(double total){
+   cout << left << setw(19) << "Amount Total" << "$" << total << endl;
+   cout << left << setw(19) << "Tax" << "$" << (total * 0.0886) << endl;
+   cout << left << setw(19) << "Amount Due" << "$" << total + (total * 0.0886);
+}
+
+double getData(){
+    
+    menuItemType menuList[3];
+    
+    int numberOfOrders;
+    int itemFromMenu;
+    int numberOfItems;
+    double total = 0;
+    string line, name = "", price = "";
+    bool name_done = false;
+    
+    cin >> numberOfOrders;
+    
+    for(int j = 0; j < numberOfOrders;j++){
+        
+        ifstream fin;
+        fin.open ("menu.txt");
+    
+        cin >> itemFromMenu;
+        
+        for(int i = 0; i < itemFromMenu; i++){
+            getline(fin,line);
+        }
+        
+        for(int i = 0; i < line.size(); i++){
+            if(line[i+1] == '$'){
+                name_done = true;
+            }
+            else if(name_done == false){
+                name += line[i];
+            }
+            else if(line[i] != '$'){
+                price += line[i];
+            }
+            
+        }
+        
+        cin >> numberOfItems;
+        
+        menuList[1].count = numberOfItems;
+        
+        switch(itemFromMenu){
+            case 1:
+                menuList[0].menuItem = name;
+                menuList[2].menuPrice = stod(price) * menuList[1].count;
+                break;
+            case 2:
+                menuList[0].menuItem = name;
+                menuList[2].menuPrice = stod(price) * menuList[1].count;
+                break;
+            case 3:
+                menuList[0].menuItem = name;
+                menuList[2].menuPrice = stod(price) * menuList[1].count;
+                break;
+            case 4:
+                menuList[0].menuItem = name;
+                menuList[2].menuPrice = stod(price) * menuList[1].count;
+                break;
+            case 5:
+                menuList[0].menuItem = name;
+                menuList[2].menuPrice = stod(price) * menuList[1].count;
+                break;
+            case 6:
+                menuList[0].menuItem = name;
+                menuList[2].menuPrice = stod(price) * menuList[1].count;
+                break;
+            case 7:
+                menuList[0].menuItem = name;
+                menuList[2].menuPrice = stod(price) * menuList[1].count;
+                break;
+            case 8:
+                menuList[0].menuItem = name;
+                menuList[2].menuPrice = stod(price) * menuList[1].count;
+                break;
+                
+        }
+                cout << left << setw(16) << menuList[0].menuItem << right << setw(2)  << menuList[1].count << " $" << menuList[2].menuPrice << endl;
+                name_done = false;
+                name = "";
+                price = "";
+                total = total + (menuList[2].menuPrice);
+                fin.close();
+    }
+            
+            
+            return total;
+        
+}
+
+void showMenu(){
+    cout << "Plain Egg $1.45" << "\nBacon and Egg $2.45" << "\nMuffin $0.99" << "\nFrench Toast $1.99" << "\nFruit Basket $2.49" << "\nCereal $0.69" << "\nCoffee $0.50" << "\nTea $0.75\n";
+}
